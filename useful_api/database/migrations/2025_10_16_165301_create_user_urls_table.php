@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_modules', function (Blueprint $table) {
+        Schema::create('user_urls', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('module_id')->constrained()->onDelete('cascade');
-            $table->boolean('is_active')->default(true);
+            $table->string('original_url');
+            $table->string('short_code')->unique();
+            $table->unsignedBigInteger('visits')->default(0);
             $table->timestamps();
         });
     }
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_modules');
+        Schema::dropIfExists('user_urls');
     }
 };
