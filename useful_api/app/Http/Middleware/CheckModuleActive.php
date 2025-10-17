@@ -10,10 +10,9 @@ class CheckModuleActive
 {
     public function handle(Request $request, Closure $next)
     {
-        $user = $request->user(); // utilisateur connecté
+        $user = $request->user();   // utilisateur connecté
         $route = $request->route();
 
-        // Vérifie si le middleware reçoit un module_id
         $moduleId = $route->parameter('module_id') ?? $route->parameter('id');
 
         if (!$moduleId) {
